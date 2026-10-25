@@ -1,4 +1,6 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import { navigate } from 'astro:transitions/client';
+import { getBackgroundVideo, saveBackgroundPreference } from '../lib/backgroundVideo';
 
 interface Props { current: 'en' | 'zh' | 'ja'; }
 
@@ -9,26 +11,52 @@ const LANGS = [
 ];
 
 export default function SynthPanel({ current }: Props) {
-  const [isPlaying, setIsPlaying] = useState(true);
+  const [isPlaying, setIsPlaying] = useState(false);
   const [pressed, setPressed] = useState(false);
   const [activeCode, setActiveCode] = useState(current);
+  const navigationTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  useEffect(() => {
+    let detachVideo = () => {};
+    const bindVideo = () => {
+      detachVideo();
+      const video = getBackgroundVideo();
+      if (!video) {
+        setIsPlaying(false);
+        return;
+      }
+      const syncPlayback = () => setIsPlaying(!video.paused && !video.ended && !video.error);
+      const events = ['play', 'playing', 'pause', 'ended', 'error', 'emptied'] as const;
+      events.forEach(event => video.addEventListener(event, syncPlayback));
+      syncPlayback();
+      detachVideo = () => events.forEach(event => video.removeEventListener(event, syncPlayback));
+    };
+    bindVideo();
+    document.addEventListener('astro:page-load', bindVideo);
+    return () => {
+      detachVideo();
+      document.removeEventListener('astro:page-load', bindVideo);
+      if (navigationTimer.current !== null) clearTimeout(navigationTimer.current);
+    };
+  }, []);
 
   const handleBg = () => {
-    const video = document.getElementById('bg-video') as HTMLVideoElement | null;
+    const video = getBackgroundVideo();
     if (!video) return;
     if (!video.paused) {
+      saveBackgroundPreference(false);
       video.pause();
-      setIsPlaying(false);
     } else {
-      video.play().catch(() => {});
-      setIsPlaying(true);
+      saveBackgroundPreference(true);
+      video.play().catch(() => setIsPlaying(false));
     }
   };
 
   const handleLang = (code: 'en' | 'zh' | 'ja', href: string) => {
     if (code === activeCode) return;
     setActiveCode(code);
-    setTimeout(() => { window.location.href = href; }, 260);
+    if (navigationTimer.current !== null) clearTimeout(navigationTimer.current);
+    navigationTimer.current = setTimeout(() => { void navigate(href); }, 260);
   };
 
   return (

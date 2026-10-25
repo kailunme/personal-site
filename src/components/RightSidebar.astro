@@ -54,7 +54,7 @@ const { content = sidebar.en } = Astro.props;
     <span class="ua-toolbar-title">NOW PLAYING</span>
   </div>
   <div style="padding:14px 10px; display:flex; justify-content:center;">
-    <IPodPlayer title={content.nowPlayingTitle} artist={content.nowPlayingArtist} client:load />
+    <IPodPlayer title={content.nowPlayingTitle} artist={content.nowPlayingArtist} client:load transition:persist="ipod-player" />
   </div>
 </div>
 

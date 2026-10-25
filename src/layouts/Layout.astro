@@ -36,15 +36,17 @@ const {
     <slot />
   </body>
   <script>
+    import { restoreBackgroundPlayback } from '../lib/backgroundVideo';
+
+    void restoreBackgroundPlayback();
+    document.addEventListener('astro:page-load', restoreBackgroundPlayback);
+
     function applyLang() {
       const path = window.location.pathname;
-      let locale = 'en';
       if (path.startsWith('/zh')) {
         document.body.setAttribute('data-lang', 'zh');
-        locale = 'zh';
       } else if (path.startsWith('/ja')) {
         document.body.setAttribute('data-lang', 'ja');
-        locale = 'ja';
       } else {
         document.body.removeAttribute('data-lang');
       }

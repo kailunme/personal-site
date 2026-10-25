@@ -23,14 +23,8 @@
   font-display: swap;
 }
 @font-face {
-  font-family: 'Iosevka';
-  src: url('/fonts/iosevka-regular.woff2') format('woff2');
-  font-weight: 400;
-  font-display: swap;
-}
-@font-face {
   font-family: 'Zpix';
-  src: url('/fonts/zpix.ttf') format('truetype');
+  src: url('/fonts/zpix.woff2') format('woff2');
   font-weight: 400;
   font-display: swap;
   unicode-range: U+0020-007E, U+00A0-00FF,
