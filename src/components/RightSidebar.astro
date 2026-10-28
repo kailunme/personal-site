@@ -48,7 +48,7 @@ const { content = sidebar.en } = Astro.props;
 </style>
 
 <!-- NOW PLAYING (iPod nano) -->
-<div class="ua-panel fade-up" style="animation-delay:0.18s;">
+<div class="ua-panel fade-up motion-delay-2">
   <div class="ua-toolbar">
     <img src="/images/xbutton.png" alt="" class="ua-xbtn" />
     <span class="ua-toolbar-title">NOW PLAYING</span>
@@ -59,7 +59,7 @@ const { content = sidebar.en } = Astro.props;
 </div>
 
 <!-- STATS -->
-<div class="ua-panel fade-up" style="animation-delay:0.26s;">
+<div class="ua-panel fade-up motion-delay-3">
   <div class="ua-toolbar">
     <img src="/images/xbutton.png" alt="" class="ua-xbtn" />
     <span class="ua-toolbar-title">{content.statsTitle}</span>
@@ -75,7 +75,7 @@ const { content = sidebar.en } = Astro.props;
 </div>
 
 <!-- SITE BUTTON -->
-<div class="ua-panel fade-up" style="animation-delay:0.34s;">
+<div class="ua-panel fade-up motion-delay-4">
   <div class="ua-toolbar">
     <img src="/images/xbutton.png" alt="" class="ua-xbtn" />
     <span class="ua-toolbar-title">{content.buttonTitle}</span>

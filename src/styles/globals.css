@@ -387,10 +387,42 @@ a:hover { color: var(--ua-link-hover); }
   from { opacity: 0; transform: translateY(8px); }
   to   { opacity: 1; transform: translateY(0); }
 }
+@keyframes page-soft-out {
+  from { opacity: 1; transform: translateY(0); }
+  to   { opacity: 0; transform: translateY(-3px); }
+}
+@keyframes page-soft-in {
+  from { opacity: 0; transform: translateY(5px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Keep page snapshots at their own proportions when the content height changes. */
+::view-transition-old(site-content),
+::view-transition-new(site-content) {
+  height: auto;
+}
 
 .blink-text { animation: blinker 1.5s infinite; }
 .spin { animation: rotate 2s linear infinite; }
-.fade-up { animation: fade-up 0.5s ease-out both; }
+/* Stagger panels only on first load. Navigation has a separate exit and entrance. */
+.fade-up {
+  animation: fade-up 780ms cubic-bezier(0.4, 0, 0.35, 1) both;
+  animation-delay: var(--panel-delay, 0ms);
+}
+.motion-delay-1 { --panel-delay: 70ms; }
+.motion-delay-2 { --panel-delay: 140ms; }
+.motion-delay-3 { --panel-delay: 210ms; }
+.motion-delay-4 { --panel-delay: 280ms; }
+
+[data-page-navigation] .fade-up {
+  animation: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fade-up {
+    animation: none;
+  }
+}
 
 /* ===== GRADIENT TEXT ===== */
 .ua-gradient-text {

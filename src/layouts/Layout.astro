@@ -16,7 +16,7 @@ const {
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="en" transition:animate="none">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -30,13 +30,18 @@ const {
       href="https://fonts.googleapis.com/css2?family=Aldrich&family=Source+Code+Pro:wght@200;300;400;500;600;700;800;900&display=swap"
       rel="stylesheet"
     />
-    <ClientRouter />
+    <ClientRouter fallback="swap" />
   </head>
   <body class="ua-body" data-lang={lang}>
     <slot />
   </body>
   <script>
     import { restoreBackgroundPlayback } from '../lib/backgroundVideo';
+
+    document.addEventListener('astro:before-swap', event => {
+      // Capture a fully visible new page, rather than restarting each entrance.
+      event.newDocument.documentElement.setAttribute('data-page-navigation', '');
+    });
 
     void restoreBackgroundPlayback();
     document.addEventListener('astro:page-load', restoreBackgroundPlayback);

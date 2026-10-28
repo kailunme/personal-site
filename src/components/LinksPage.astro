@@ -3,6 +3,7 @@ import type { LinksContent } from '../i18n/content';
 import type { NavContent } from '../i18n/content';
 import NavBar from './NavBar.astro';
 import ControlPanel from './ControlPanel.astro';
+import { pageTransition } from '../lib/pageTransitions';
 
 interface Props {
   content: LinksContent;
@@ -12,7 +13,7 @@ interface Props {
 const { content, nav, locale } = Astro.props;
 ---
 
-<div class="links-grid">
+<div class="links-grid" transition:name="site-content" transition:animate={pageTransition}>
   <div class="links-col-left">
     <NavBar content={nav} />
     <ControlPanel current={locale} />
@@ -21,7 +22,7 @@ const { content, nav, locale } = Astro.props;
   <!-- middle column: MISC + NEOWEB (panels 4 & 5) -->
   <div class="links-col-main">
     {content.categories.slice(3).map((cat, i) => (
-      <div class="ua-panel fade-up" style={`animation-delay:${0.06 * (i + 1)}s`}>
+      <div class:list={['ua-panel', 'fade-up', `motion-delay-${i + 1}`]}>
         <div class="lp-toolbar">
           <span class="lp-cat-title">{cat.name}</span>
           <img src="/images/xbutton.png" alt="" class="ua-xbtn" />
@@ -41,7 +42,7 @@ const { content, nav, locale } = Astro.props;
   <!-- right column: WORK + GOOGLE + BROWSE (panels 1–3) -->
   <div class="links-col-right">
     {content.categories.slice(0, 3).map((cat, i) => (
-      <div class="ua-panel fade-up" style={`animation-delay:${0.06 * (i + 3)}s`}>
+      <div class:list={['ua-panel', 'fade-up', `motion-delay-${i + 1}`]}>
         <div class="lp-toolbar">
           <span class="lp-cat-title">{cat.name}</span>
           <img src="/images/xbutton.png" alt="" class="ua-xbtn" />

@@ -5,6 +5,7 @@ import MainContent from '../../components/MainContent.astro';
 import UpdatesWindow from '../../components/UpdatesWindow.astro';
 import RightSidebar from '../../components/RightSidebar.astro';
 import ControlPanel from '../../components/ControlPanel.astro';
+import { pageTransition } from '../../lib/pageTransitions';
 import { nav, main, updates, sidebar } from '../../i18n/content';
 ---
 
@@ -15,7 +16,7 @@ import { nav, main, updates, sidebar } from '../../i18n/content';
     </video>
   </div>
 
-  <div class="site-grid">
+  <div class="site-grid" transition:name="site-content" transition:animate={pageTransition}>
     <div class="col-left">
       <NavBar content={nav.ja} />
       <ControlPanel current="ja" />
