@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { navigate } from 'astro:transitions/client';
 import { getBackgroundVideo, saveBackgroundPreference } from '../lib/backgroundVideo';
+import { MixedText } from './MixedText';
 
 interface Props { current: 'en' | 'zh' | 'ja'; }
 
@@ -56,7 +57,9 @@ export default function SynthPanel({ current }: Props) {
     if (code === activeCode) return;
     setActiveCode(code);
     if (navigationTimer.current !== null) clearTimeout(navigationTimer.current);
-    navigationTimer.current = setTimeout(() => { void navigate(href); }, 260);
+    navigationTimer.current = setTimeout(() => {
+      void navigate(href, { info: { preserveScroll: true } });
+    }, 260);
   };
 
   return (
@@ -68,21 +71,19 @@ export default function SynthPanel({ current }: Props) {
         alignItems: 'center',
         marginBottom: 6,
       }}>
-        <span style={{
-          fontFamily: "'Zpix', monospace",
+        <span className="synth-text" style={{
           fontSize: 9,
           letterSpacing: 2,
           color: '#bcc7d4',
           textTransform: 'uppercase',
-        }}>CTRL</span>
+        }}><MixedText text="CTRL" /></span>
         <div style={{ flex: 1, height: 1, background: 'rgba(160,185,215,0.35)', margin: '0 8px' }} />
-        <span style={{
-          fontFamily: "'Zpix', monospace",
+        <span className="synth-text" style={{
           fontSize: 9,
           letterSpacing: 2,
           color: '#bcc7d4',
           textTransform: 'uppercase',
-        }}>SYN-01</span>
+        }}><MixedText text="SYN-01" /></span>
       </div>
 
       {/* single combined row: lang switches + BG button */}
@@ -156,14 +157,13 @@ export default function SynthPanel({ current }: Props) {
                 </div>
               </button>
               {/* label */}
-              <span style={{
-                fontFamily: "'Zpix', monospace",
+              <span className="synth-text" style={{
                 fontSize: 12,
                 letterSpacing: 0,
                 color: active ? '#5a9fd8' : '#8b939c',
                 transition: 'color 0.15s',
                 whiteSpace: 'nowrap',
-              }}>{l.label}</span>
+              }}><MixedText text={l.label} /></span>
             </div>
           );
         })}
@@ -221,15 +221,14 @@ export default function SynthPanel({ current }: Props) {
               <line x1="7.5" y1="0.5" x2="7.5" y2="6"/>
             </svg>
           </button>
-          <span style={{
-            fontFamily: "'Zpix', monospace",
+          <span className="synth-text" style={{
             fontSize: 12,
             letterSpacing: 0,
             color: isPlaying ? '#5a9fd8' : '#8b939c',
             transition: 'color 0.15s',
             display: 'block',
             textAlign: 'center',
-          }}>BG</span>
+          }}><MixedText text="BG" /></span>
         </div>
       </div>
     </div>

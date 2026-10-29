@@ -118,24 +118,23 @@ const { content = nav.en } = Astro.props;
     text-decoration: none;
     user-select: none;
   }
-  .social-link img {
+  .social-icon {
     width: 17px;
     height: 17px;
-    opacity: 0.45;
+    background-color: rgba(0,0,0,0.45);
+    mask: var(--social-icon) center / contain no-repeat;
     image-rendering: pixelated;
-    transition: opacity 0.15s;
   }
-  .social-link img.instagram-icon {
-    width: 17px;
-    height: 17px;
-  }
+  .github-icon { --social-icon: url('/images/icon/github.svg'); }
+  .instagram-icon { --social-icon: url('/images/icon/instagram.svg'); }
+  .envelope-icon { --social-icon: url('/images/icon/envelope.svg'); }
   .social-link:hover {
     background: linear-gradient(180deg, #f0f6ff, #e8f0fa);
     box-shadow: 0 2px 6px rgba(100,160,220,0.2), inset 0 -1px 3px rgba(180,200,230,0.3);
     border-color: rgba(100,160,220,0.5);
   }
-  .social-link:hover img {
-    opacity: 0.75;
+  .social-link:hover .social-icon {
+    background-color: var(--ua-link-hover);
   }
 
   #loadercircle { animation: rotate 2s linear infinite; }
@@ -159,14 +158,14 @@ const { content = nav.en } = Astro.props;
   </nav>
 
   <div class="navbar-footer">
-    <a href="https://github.com/kailunme" target="_blank" class="social-link" title="GitHub">
-      <img src="/images/icon/github.svg" alt="GitHub" />
+    <a href="https://github.com/kailunme" target="_blank" class="social-link" title="GitHub" aria-label="GitHub">
+      <span class="social-icon github-icon" aria-hidden="true"></span>
     </a>
-    <a href="https://www.instagram.com/kailun.me" target="_blank" class="social-link" title="Instagram">
-      <img src="/images/icon/instagram.svg" alt="Instagram" class="instagram-icon" />
+    <a href="https://www.instagram.com/kailun.me" target="_blank" class="social-link" title="Instagram" aria-label="Instagram">
+      <span class="social-icon instagram-icon" aria-hidden="true"></span>
     </a>
-    <a href="mailto:hi@kailun.me" class="social-link" title="Email">
-      <img src="/images/icon/envelope.svg" alt="Email" />
+    <a href="mailto:hi@kailun.me" class="social-link" title="Email" aria-label="Email">
+      <span class="social-icon envelope-icon" aria-hidden="true"></span>
     </a>
   </div>
 </div>

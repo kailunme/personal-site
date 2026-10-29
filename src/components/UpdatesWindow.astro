@@ -1,6 +1,7 @@
 ---
 import type { Update } from '../i18n/content';
 import { updates } from '../i18n/content';
+import { MixedText } from './MixedText';
 
 interface Props { content?: Update[]; }
 const { content = updates.en } = Astro.props;
@@ -39,7 +40,7 @@ const { content = updates.en } = Astro.props;
     {content.map(u => (
       <div class="update-row">
         <span class="update-date">{u.date}</span>
-        <span class="update-text">{u.text}</span>
+        <span class="update-text"><MixedText text={u.text} /></span>
       </div>
     ))}
   </div>

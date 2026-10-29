@@ -67,11 +67,12 @@ export const linksData: Record<Locale, LinksContent> = {
     desc: 'Places on the web worth visiting. Updated whenever I find something good.',
     categories: [
       {
-        name: 'WORK',
+        name: 'AI TOOLS',
         links: [
+          { title: 'Artificial Analysis', url: 'https://artificialanalysis.ai/zh' },
+          { title: 'Arena Leaderboard', url: 'https://arena.ai/leaderboard' },
           { title: 'Right Code', url: 'https://www.right.codes/dashboard' },
           { title: 'AI派', url: 'https://api.aipaibox.com/console/log' },
-          { title: 'AI Agent Performance Leaderboard', url: 'https://arena.ai/leaderboard/agent' },
         ],
       },
       {
@@ -84,7 +85,7 @@ export const linksData: Record<Locale, LinksContent> = {
         ],
       },
       {
-        name: 'BROWSE',
+        name: 'FREQUENT',
         links: [
           { title: '山口大学教务系统', url: 'https://www.kyoumu.jimu.yamaguchi-u.ac.jp/portal/' },
           { title: '山口大学 Moodle', url: 'https://mdcs5.cc.yamaguchi-u.ac.jp/moodle/login/index.php' },
@@ -124,6 +125,7 @@ export const linksData: Record<Locale, LinksContent> = {
           { title: '银河录像局', url: 'https://nf.video/' },
           { title: 'Lumia 1020 漫游指南', url: 'https://sspai.com/post/106467' },
           { title: 'Neumorphism CSS', url: 'https://design.dev/tools/neumorphism/?type=raised&mode=light&bg=%23dde3ec&text=%233c4858&dist=12&blur=36&radius=24&shape=square&intensity=7&format=css&preset=soft' },
+          { title: '机场推荐与机场评测', url: 'https://jichangtuijian.com/' },
         ],
       },
       {
@@ -150,7 +152,6 @@ export const linksData: Record<Locale, LinksContent> = {
           { title: 'Kit FUI', url: 'https://saji8k.github.io/kit-fui/' },
           { title: 'Jamesland', url: 'https://jamesland.org/' },
           { title: 'doro0', url: 'https://dorozero.neocities.org/home' },
-          { title: '机场推荐与机场评测', url: 'https://jichangtuijian.com/' },
         ],
       },
     ],

@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
+import { MixedText } from './MixedText';
 
 const PLAYLIST = [
   { title: "Fear",    artist: "alyzea",  src: "/audio/Fear.mp3" },
@@ -136,14 +137,14 @@ export default function iPodPlayer({ title }: Props) {
               overflow: 'hidden',
               textOverflow: 'ellipsis',
               marginBottom: 1,
-            }}>{track.title}</div>
+            }}><MixedText text={track.title} /></div>
             {/* artist */}
             <div style={{
               fontFamily: 'var(--font-body)',
               fontSize: 10,
               color: '#7a8799',
               marginBottom: 6,
-            }}>{track.artist}</div>
+            }}><MixedText text={track.artist} /></div>
             {/* progress bar */}
             <div style={{
               height: 3,

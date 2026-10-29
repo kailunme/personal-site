@@ -38,7 +38,18 @@ const {
   <script>
     import { restoreBackgroundPlayback } from '../lib/backgroundVideo';
 
+    let preserveScroll = false;
+    let savedScroll: { left: number; top: number } | undefined;
+
+    document.addEventListener('astro:before-preparation', event => {
+      preserveScroll = event.info?.preserveScroll === true;
+      savedScroll = undefined;
+    });
+
     document.addEventListener('astro:before-swap', event => {
+      if (preserveScroll) {
+        savedScroll = { left: window.scrollX, top: window.scrollY };
+      }
       // Capture a fully visible new page, rather than restarting each entrance.
       event.newDocument.documentElement.setAttribute('data-page-navigation', '');
     });
@@ -62,5 +73,16 @@ const {
       });
     }
     document.addEventListener('astro:after-swap', applyLang);
+    document.addEventListener('astro:after-swap', () => {
+      if (!savedScroll) return;
+      window.scrollTo({ ...savedScroll, behavior: 'instant' });
+      history.replaceState({
+        ...history.state,
+        scrollX: window.scrollX,
+        scrollY: window.scrollY,
+      }, '');
+      savedScroll = undefined;
+      preserveScroll = false;
+    });
   </script>
 </html>

@@ -2,6 +2,7 @@
 import type { SidebarContent } from '../i18n/content';
 import { sidebar } from '../i18n/content';
 import IPodPlayer from './iPodPlayer';
+import { MixedText } from './MixedText';
 
 interface Props { content?: SidebarContent; }
 const { content = sidebar.en } = Astro.props;
@@ -67,8 +68,8 @@ const { content = sidebar.en } = Astro.props;
   <div style="padding:10px 14px;">
     {content.stats.map(s => (
       <div class="stat-row">
-        <span class="stat-label">{s.label}</span>
-        <span class="stat-value">{s.value}</span>
+        <span class="stat-label"><MixedText text={s.label} /></span>
+        <span class="stat-value"><MixedText text={s.value} /></span>
       </div>
     ))}
   </div>
@@ -83,10 +84,10 @@ const { content = sidebar.en } = Astro.props;
   <div class="button-gif-wrap">
     <img src="/images/UnicodeAngelButton.gif" alt="unicodeangel" class="site-button-img" />
     <span style="font-family:var(--font-body);font-size:10px;color:var(--ua-text-muted-light);opacity:0.7;text-align:center;line-height:1.5;">
-      Inspired by <a href="https://unicodeangel.neocities.org" target="_blank" style="color:inherit;text-decoration:underline;text-underline-offset:2px;">unicodeangel</a>
+      <MixedText text="Inspired by " /> <a href="https://unicodeangel.neocities.org" target="_blank" style="color:inherit;text-decoration:underline;text-underline-offset:2px;"><MixedText text="unicodeangel" /></a>
     </span>
     <span style="font-family:var(--font-body);font-size:10px;color:var(--ua-text-muted-light);opacity:0.7;text-align:center;line-height:1.5;">
-      Icons from <a href="https://pixeliconlibrary.com/" target="_blank" style="color:inherit;text-decoration:underline;text-underline-offset:2px;">Pixel Icon Library</a> by <a href="https://hackernoon.com/" target="_blank" style="color:inherit;text-decoration:underline;text-underline-offset:2px;">HackerNoon</a>
+      <MixedText text="Icons from " /> <a href="https://pixeliconlibrary.com/" target="_blank" style="color:inherit;text-decoration:underline;text-underline-offset:2px;"><MixedText text="Pixel Icon Library" /></a> <MixedText text=" by " /> <a href="https://hackernoon.com/" target="_blank" style="color:inherit;text-decoration:underline;text-underline-offset:2px;"><MixedText text="HackerNoon" /></a>
     </span>
   </div>
 </div>

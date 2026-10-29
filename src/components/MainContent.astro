@@ -1,6 +1,8 @@
 ---
 import type { MainContent } from '../i18n/content';
 import { main } from '../i18n/content';
+import { MixedText } from './MixedText';
+import { formatMixedTypographyHtml } from '../lib/mixedTypography';
 
 interface Props { content?: MainContent; }
 const { content = main.en } = Astro.props;
@@ -110,6 +112,10 @@ const { projects, skills } = content;
       inset 0 1px 2px rgba(255,255,255,0.9);
   }
   .project-card + .project-card { margin-top: 10px; }
+
+  .project-star-value { font-family: 'Zpix', sans-serif; }
+  :global([data-lang="zh"]) .project-star-value,
+  :global([data-lang="ja"]) .project-star-value { font-family: var(--font-body); }
 
   .project-name {
     font-family: var(--font-body);
@@ -229,16 +235,16 @@ const { projects, skills } = content;
   </div>
 
   <div class="mc-body">
-    <p class="mc-lead" set:html={content.welcomeP1} />
+    <p class="mc-lead" set:html={formatMixedTypographyHtml(content.welcomeP1)} />
     <span class="mc-sep"></span>
-    <p class="mc-lead" set:html={content.welcomeP2} />
+    <p class="mc-lead" set:html={formatMixedTypographyHtml(content.welcomeP2)} />
     <span class="mc-sep"></span>
     <span class="blink-notice">
-      <span class="blink-star">✦</span> {content.blinkNotice} <span class="blink-star">✦</span>
+      <span class="blink-star">✦</span> <MixedText text={content.blinkNotice} /> <span class="blink-star">✦</span>
     </span>
   </div>
 
-  <div class="fact-bar">{content.factBar}</div>
+  <div class="fact-bar"><MixedText text={content.factBar} /></div>
 </div>
 
 <!-- PROJECTS PANEL -->
@@ -249,16 +255,16 @@ const { projects, skills } = content;
   </div>
 
   <div class="mc-body">
-    <p class="mc-h2">{content.projectsLabel}</p>
+    <p class="mc-h2"><MixedText text={content.projectsLabel} /></p>
     {projects.map(p => (
       <div class="project-card">
         <div style="display:flex;align-items:baseline;gap:8px;">
-          <a href={p.href} class="project-name">{p.name}</a>
-          <span class="project-star"><svg width="11" height="11" viewBox="0 0 10 10" fill="currentColor" style="display:inline-block;vertical-align:middle;margin-right:2px;position:relative;top:-1px;flex-shrink:0;"><polygon points="5,0.5 6.2,3.8 9.8,3.8 6.9,5.9 8,9.2 5,7.2 2,9.2 3.1,5.9 0.2,3.8 3.8,3.8"/></svg><span style="font-family:'Zpix',sans-serif;">{p.star}</span></span>
+          <a href={p.href} class="project-name"><MixedText text={p.name} /></a>
+          <span class="project-star"><svg width="11" height="11" viewBox="0 0 10 10" fill="currentColor" style="display:inline-block;vertical-align:middle;margin-right:2px;position:relative;top:-1px;flex-shrink:0;"><polygon points="5,0.5 6.2,3.8 9.8,3.8 6.9,5.9 8,9.2 5,7.2 2,9.2 3.1,5.9 0.2,3.8 3.8,3.8"/></svg><span class="project-star-value"><MixedText text={p.star} /></span></span>
         </div>
-        <p class="project-desc">{p.desc}</p>
+        <p class="project-desc"><MixedText text={p.desc} /></p>
         <div class="project-meta">
-          {p.tags.map(t => <span class="ua-tag">{t}</span>)}
+          {p.tags.map(t => <span class="ua-tag"><MixedText text={t} /></span>)}
         </div>
       </div>
     ))}
@@ -273,14 +279,14 @@ const { projects, skills } = content;
   </div>
 
   <div class="mc-body">
-    <p class="mc-h2">{content.proficiencyLabel}</p>
+    <p class="mc-h2"><MixedText text={content.proficiencyLabel} /></p>
     {skills.map(s => (
       <div class="skill-row">
-        <span class="skill-name">{s.name}</span>
+        <span class="skill-name"><MixedText text={s.name} /></span>
         <div class="skill-track">
           <div class="skill-fill" style={`width:${s.level}%`}></div>
         </div>
-        <span class="skill-pct">{s.level}%</span>
+        <span class="skill-pct"><MixedText text={String(s.level)} />%</span>
       </div>
     ))}
   </div>

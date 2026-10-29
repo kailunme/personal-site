@@ -75,8 +75,13 @@
 }
 
 /* ===== LOCALE FONT OVERRIDES ===== */
-[data-lang="zh"] { --font-body: 'Zpix', sans-serif; }
-[data-lang="ja"] { --font-body: 'Zpix', sans-serif; }
+.synth-text {
+  font-family: 'Aldrich', 'Zpix', Verdana, sans-serif;
+  line-height: 1.6;
+}
+
+[data-lang="zh"],
+[data-lang="ja"] { --font-body: 'Aldrich', 'Zpix', Verdana, sans-serif; }
 
 /* ===== RESETS ===== */
 *, *::before, *::after { box-sizing: border-box; }
@@ -217,6 +222,7 @@ a:hover { color: var(--ua-link-hover); }
   display: flex;
   align-items: baseline;
   gap: 6px;
+  min-width: 0;
   padding: 5px 0;
   border-bottom: 1px dashed rgba(180,205,235,0.4);
 }
@@ -230,16 +236,27 @@ a:hover { color: var(--ua-link-hover); }
 }
 
 .link-title {
-  font-family: 'Zpix', var(--font-source-code-pro);
-  font-size: 13px;
-  color: #5a9fd8;
+  font-family: 'Aldrich', 'Zpix', Verdana, sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+  color: #6a9fd8;
   text-decoration: none;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  flex-shrink: 0;
+  min-width: 0;
+  flex-shrink: 1;
 }
 .link-title:hover { color: var(--ua-link-hover); text-decoration: underline; text-underline-offset: 2px; }
+
+/* Lower Latin letters and digits; keep punctuation at its natural baseline. */
+.link-title-latin,
+.synth-text .mixed-latin,
+[data-lang="zh"] .mixed-latin,
+[data-lang="ja"] .mixed-latin {
+  position: relative;
+  top: 0.08em;
+}
 
 @media (max-width: 1050px) {
   .links-grid {

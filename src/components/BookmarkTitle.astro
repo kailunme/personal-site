@@ -1,0 +1,12 @@
+---
+interface Props {
+  title: string;
+}
+
+const { title } = Astro.props;
+const parts = title.split(/([A-Za-z0-9]+)/);
+---
+
+{parts.map(part => (
+  <span class:list={{ 'link-title-latin': /^[A-Za-z0-9]+$/.test(part) }}>{part}</span>
+))}
