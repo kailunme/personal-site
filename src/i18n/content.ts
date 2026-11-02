@@ -90,6 +90,7 @@ export const linksData: Record<Locale, LinksContent> = {
           { title: '山口大学教务系统', url: 'https://www.kyoumu.jimu.yamaguchi-u.ac.jp/portal/' },
           { title: '山口大学 Moodle', url: 'https://mdcs5.cc.yamaguchi-u.ac.jp/moodle/login/index.php' },
           { title: '山口大学', url: 'https://www.yamaguchi-u.ac.jp/' },
+          { title: 'Web情報工学研究室', url: 'http://www.wie.csse.yamaguchi-u.ac.jp/index.html' },
           { title: 'Bilibili', url: 'http://bilibili.com/' },
           { title: '维基百科', url: 'https://zh.wikipedia.org/wiki/Wikipedia:%E9%A6%96%E9%A1%B5' },
           { title: 'YouTube', url: 'https://youtube.com/' },
